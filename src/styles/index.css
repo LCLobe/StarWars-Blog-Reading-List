@@ -1,3 +1,27 @@
 /* 
     General Styles
 */
+
+.card {
+    min-height: 400px;
+    min-width: 320px;
+    border: solid 1px gainsboro;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.roulette{
+    overflow-x: scroll;
+}
+
+.card-image {
+    object-fit: contain;
+}
+
+.icon {
+    color: blue;
+}
+
+.card-button {
+    width: 50px;
+}

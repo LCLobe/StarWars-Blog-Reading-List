@@ -1,13 +1,37 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import Home from "../modules/Home.jsx";
-import PlanetDetails from "../modules/PlanetDetails.jsx";
+import Layout from "../modules/Layout.jsx";
+
+import Home from "../views/Home.jsx";
+import Details from "../views/Details.jsx";
+import PlanetDetails from "../modules/DetailsPlanet.jsx";
 
 export const Router = createBrowserRouter([
     {
         path: '/'  ,
-        element: <Home />
+        element: <Layout />,
+        children: [
+            {
+                path: '/', 
+                element: <Home />
+            },
+            {
+                path: '/details'  ,
+                element: <Details />,
+                children: [
+                    {
+                        path: '/details',
+                        element: <Details />
+                    },
+                    {
+                        path: '/details/:group/:id',
+                        element: <Details />
+                    }
+                ]
+            } ,
+
+    ]
     },
     {
         path: '/planetdetails'  ,

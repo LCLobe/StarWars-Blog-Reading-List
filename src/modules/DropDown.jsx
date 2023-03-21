@@ -10,7 +10,7 @@ const DropDown = () => {
 
     return (
         <div className="btn-group">
-            <button type="button" className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" className="btn dropdown-toggle navbar-text" data-bs-toggle="dropdown" aria-expanded="false">
                 Favourites 
                 {store.favourites.length ? <span className="dropdown-number"> {store.favourites.length}</span> : null}
             </button>

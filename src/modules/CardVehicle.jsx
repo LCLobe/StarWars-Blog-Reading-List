@@ -3,14 +3,6 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-// const openDetails = () => {
-//     const navigate = useNavigate()
-//     alert("hola");  
-//     //navigate("/details");
-//     <Link to="/details"><Details info={cardInfo}/></Link>;
-// };
-
-
 const getPathDetails = (URLstring) => {
     const splitArray = URLstring.split("/");
     const lastTwoElements = splitArray[splitArray.length-2]+"/"+splitArray[splitArray.length-1];

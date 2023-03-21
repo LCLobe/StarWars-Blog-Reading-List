@@ -1,6 +1,8 @@
 import React, { createContext, useContext} from "react";
 import { useEffect, useState } from "react";
 
+import {arrayContainsObjectWithGivenNameProperty, getGroupDetails, getPathDetails, getArrayOfSinglePropertyArrays} from "../utils/functions.js"
+
 const Context = createContext();
 
 export const ContextProvider = ({children}) => {
@@ -31,7 +33,6 @@ export const ContextProvider = ({children}) => {
         .then(res => res.json())
         .then(data => {
             setPeople(data);
-            //console.log(data.results);
             })
         .catch(err => console.error(err))
 
@@ -63,7 +64,11 @@ export const ContextProvider = ({children}) => {
     };
     const actions ={
         handleAddToFavourites,
-        handleDeleteFromFavourites
+        handleDeleteFromFavourites,
+        getPathDetails,
+        getGroupDetails,
+        arrayContainsObjectWithGivenNameProperty,
+        getArrayOfSinglePropertyArrays
     };
 
     return (

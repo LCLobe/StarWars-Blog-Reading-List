@@ -18,11 +18,8 @@ const Card = ({url, uid, propOneLabel, propOneContent, propTwoLabel, propTwoCont
         //if (uid==1 && actions.getGroupDetails(url) === "planets") setUrlForImage("https://talentclick.com/wp-content/uploads/2021/08/placeholder-image.png"); 
         if (uid==1 && actions.getGroupDetails(url) === "planets") setUrlForImage("https://static.wikia.nocookie.net/esstarwars/images/b/b0/Tatooine_TPM.png");
 
-        fetch(url)
-        .then(res => res.json())
-        .then(({result: {properties}}) => {
-            setCardInfo(properties);
-        })
+        actions.getResultProperties(url,setCardInfo)
+
     },[]);
 
     const handlerLocalToTogleFavourites = ()=>{

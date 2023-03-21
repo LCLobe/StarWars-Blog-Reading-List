@@ -2,6 +2,7 @@ import React, { createContext, useContext} from "react";
 import { useEffect, useState } from "react";
 
 import {arrayContainsObjectWithGivenNameProperty, getGroupDetails, getPathDetails, getArrayOfSinglePropertyArrays} from "../utils/functions.js"
+import { getResultProperties, getCharacters, getPlanets, getVehicles } from "../services/getFetch.js";
 
 const Context = createContext();
 
@@ -29,28 +30,10 @@ export const ContextProvider = ({children}) => {
 
     //Fetch
     useEffect(() => {
-        fetch("https://www.swapi.tech/api/people/")
-        .then(res => res.json())
-        .then(data => {
-            setPeople(data);
-            })
-        .catch(err => console.error(err))
-
-        fetch("https://www.swapi.tech/api/vehicles/")
-        .then(res => res.json())
-        .then(data => {
-            setVehicles(data);
-            //console.log(data.results);
-            })
-        .catch(err => console.error(err))
-
-        fetch("https://www.swapi.tech/api/planets/")
-        .then(res => res.json())
-        .then(data => {
-            setPlanets(data)
-            //console.log(data.results);
-            })
-        .catch(err => console.error(err))
+        
+        getCharacters(setPeople);
+        getPlanets(setPlanets);
+        getVehicles(setVehicles);
 
     }, []);
 
@@ -60,7 +43,6 @@ export const ContextProvider = ({children}) => {
         vehicles,
         planets,
         favourites
-
     };
     const actions ={
         handleAddToFavourites,
@@ -68,7 +50,8 @@ export const ContextProvider = ({children}) => {
         getPathDetails,
         getGroupDetails,
         arrayContainsObjectWithGivenNameProperty,
-        getArrayOfSinglePropertyArrays
+        getArrayOfSinglePropertyArrays,
+        getResultProperties
     };
 
     return (

@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 const DropDown = () => {
 
     const {store, actions} = useAppContext();
-    //console.log(store);
-
+    
     return (
         <div className="btn-group">
             <button type="button" className="btn dropdown-toggle navbar-text" data-bs-toggle="dropdown" aria-expanded="false">
@@ -15,11 +14,10 @@ const DropDown = () => {
                 {store.favourites.length ? <span className="dropdown-number"> {store.favourites.length}</span> : null}
             </button>
             <ul className="dropdown-menu">
-                {store.favourites.map(({name, group, number, url}) => {
-                    //console.log("DropDown: ", name, group, number, url);
+                 {store.favourites.map(({name, group, number, url}) => {
                     
                     const handlerLocalRemoveFromFavourites = ()=>{
-                        console.log("estamos ejecutando el handler");
+                        // console.log("hola");
                         return actions.handleDeleteFromFavourites(name);
                     }
                     

@@ -9,10 +9,12 @@ const Context = createContext();
 export const ContextProvider = ({children}) => {
 
     //Hooks
-    const [people, setPeople] = useState();
-    const [vehicles, setVehicles] = useState();
-    const [planets, setPlanets] = useState();
+    const [people, setPeople] = useState([]);
+    const [vehicles, setVehicles] = useState([]);
+    const [planets, setPlanets] = useState([]);
     const [favourites, setFavourites] = useState([]);
+
+    //LocalStorage
 
     //Functions
     const handleAddToFavourites = (name, group, number, url) => {
@@ -31,11 +33,58 @@ export const ContextProvider = ({children}) => {
     //Fetch
     useEffect(() => {
         
-        getCharacters(setPeople);
-        getPlanets(setPlanets);
-        getVehicles(setVehicles);
-
+        try{
+            if (localStorage.getItem('storagePeople') != null) {
+                const myTempPeople = JSON.parse(localStorage.getItem('storagePeople'));
+                setPeople(myTempPeople);
+            }else {
+                getCharacters(setPeople);
+            }
+        }catch (err) {
+            console.log('Error: ', err.message);
+        }
+        try{
+            if (localStorage.getItem('storagePlanets') != null) {
+                const myTempPlanets = JSON.parse(localStorage.getItem('storagePlanets'));
+                setPlanets(myTempPlanets);
+            }else {
+                getPlanets(setPlanets);
+            }
+        }catch (err) {
+            console.log('Error: ', err.message);
+        }
+        try{
+            if (localStorage.getItem('storageVehicles') != null) {
+                const myTempVehicles = JSON.parse(localStorage.getItem('storageVehicles'));
+                setVehicles(myTempVehicles);
+            }else {
+                getVehicles(setVehicles);
+            }
+        }catch (err) {
+            console.log('Error: ', err.message);
+        }
+        try{
+            if (localStorage.getItem('storageFavourites') != null) {
+                const myTempFavourites = JSON.parse(localStorage.getItem('storageFavourites'));
+                setFavourites(myTempFavourites);
+            }
+        }catch (err) {
+            console.log('Error: ', err.message);
+        }
     }, []);
+
+    useEffect(()=>{
+        if (people.length) localStorage.setItem('storagePeople', JSON.stringify(people));
+    },[people]);
+    useEffect(()=>{
+       if(vehicles.length) localStorage.setItem('storageVehicles', JSON.stringify(vehicles));
+    },[vehicles]);
+    useEffect(()=>{
+       if(planets.length) localStorage.setItem('storagePlanets', JSON.stringify(planets));
+    },[planets]);
+    useEffect(()=>{
+       if (favourites.length) localStorage.setItem('storageFavourites', JSON.stringify(favourites));
+    },[favourites]);
 
     //Flux Context Info
     const store ={

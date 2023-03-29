@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 
 import useAppContext from "../store/Context";
+import { object } from "prop-types";
 
 const Details = ()=> { 
     const params =useParams();
@@ -17,15 +18,35 @@ const Details = ()=> {
     if (params.group=="planets" && params.id ==1) setUrlForImage("https://talentclick.com/wp-content/uploads/2021/08/placeholder-image.png");
 
     //Fetch with params
+    
     useEffect(()=>{
-        fetch(urlForFetch)
-        .then(res => res.json())
-        .then(({result}) => {
-            setItemInfo(result);
-            return actions.getArrayOfSinglePropertyArrays(result.properties)
-            })  
-        .then(result => setArrayOfProperties(result))
-        .catch(err => console.error(err))    
+        try{
+
+            if (localStorage.getItem(urlForFetch) != null) {
+                const myCardStorage = JSON.parse(localStorage.getItem(urlForFetch));
+                //console.log("Distinto de undefined: ", myCardStorage);
+                
+                setItemInfo(myCardStorage);
+                setArrayOfProperties(Object.entries(myCardStorage));
+                //console.log("iteminfo: ", itemInfo);
+    
+            }else {
+                console.log("estoy en el else");
+                useEffect(()=>{
+                    fetch(urlForFetch)
+                    .then(res => res.json())
+                    .then(({result}) => {
+                        setItemInfo(result);
+                        setArrayOfProperties(Object.entries(result));
+                    //     return actions.getArrayOfSinglePropertyArrays(result.properties)
+                        })  
+                    // .then(result => setArrayOfProperties(result))
+                    .catch(err => console.error(err))    
+                },[]);
+            }
+        }catch (err) {
+            console.log('Error: ', err.message);
+        }
     },[]);
     
     return (
@@ -37,7 +58,7 @@ const Details = ()=> {
                     </div>
                 </div>
                 <div className="col">
-                    <h1 className="details-title">{itemInfo? itemInfo.properties.name : ""}</h1>
+                    <h1 className="details-title">{itemInfo? itemInfo.name : ""}</h1>
                     <p className="details-paragraph">{itemInfo? itemInfo.description : ""}</p>
                 </div>
             </div>
@@ -54,6 +75,7 @@ const Details = ()=> {
                 })
                 :  "loading..." } 
             </div>
+            
         </div>
     )
 

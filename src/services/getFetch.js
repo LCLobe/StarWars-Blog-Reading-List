@@ -2,6 +2,7 @@ const getFetch = (url, useStateSeter) => {
     fetch(url)
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             useStateSeter(data);
             })
         .catch(err => console.error(err))

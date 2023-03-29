@@ -11,13 +11,24 @@ const Home = () =>  {
     const {store} = useAppContext();
     
     const {people, vehicles, planets} = store;
-
+    console.log(people);
+    console.log(planets);
+    console.log(vehicles);
+    
+    if (people.length == 0 || planets.length == 0 || vehicles.length == 0) {
+        return (
+            <div className="spinner-border text-warning" role="status">
+                <h1>Loading...</h1> 
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        );
+    }
     return (
         <>
         <h1 className="home-title mt-5">Characters</h1>
         <div className="roulette d-flex inline p-2">
-            {people?.results.length
-            ? people.results.map((element)=>{
+            {people?.results.length ? 
+                people.results.map((element)=>{
                 return <Card 
                             url={element.url} 
                             uid={element.uid} 
@@ -29,13 +40,13 @@ const Home = () =>  {
                             propThreeLabel="Eye-Color"
                             propThreeContent="eye_color"
                         />
-            }) 
+                }) 
             : null}
         </div>
         <h1 className="home-title">Planets</h1>
         <div className="roulette d-flex inline p-2">
-            {planets?.results.length
-            ? planets.results.map((element)=>{
+            {planets?.results.length ? 
+                planets.results.map((element)=>{
                 return <Card
                             url={element.url}
                             uid={element.uid}

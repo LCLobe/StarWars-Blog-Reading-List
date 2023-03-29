@@ -33,7 +33,8 @@ span .navbar-text{
     border: solid 1px gainsboro;
     border-radius: 10px;
     box-sizing: border-box;
-    background-color: gray;
+    background: rgb(94,92,59);
+    background: radial-gradient(circle, rgba(94,92,59,1) 10%, rgba(101,102,95,1) 40%);
 }
 .roulette{
     overflow-x: scroll;

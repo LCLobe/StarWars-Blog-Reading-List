@@ -18,9 +18,26 @@ const Card = ({url, uid, propOneLabel, propOneContent, propTwoLabel, propTwoCont
         //if (uid==1 && actions.getGroupDetails(url) === "planets") setUrlForImage("https://talentclick.com/wp-content/uploads/2021/08/placeholder-image.png"); 
         if (uid==1 && actions.getGroupDetails(url) === "planets") setUrlForImage("https://static.wikia.nocookie.net/esstarwars/images/b/b0/Tatooine_TPM.png");
 
-        actions.getResultProperties(url,setCardInfo)
+        try{
+            //console.log(url, localStorage.getItem(url));
+            if (localStorage.getItem(url) != null) {
+                const myCardStorage = JSON.parse(localStorage.getItem(url));
+                //console.log("Distinto de undefined: ", myCardStorage);
+                setCardInfo(myCardStorage);
+            }else {
+                actions.getResultProperties(url,setCardInfo)
+            }
+        }catch (err) {
+            console.log('Error: ', err.message);
+        }
+
+        //actions.getResultProperties(url,setCardInfo)
 
     },[]);
+
+    useEffect(()=>{
+        localStorage.setItem(url, JSON.stringify(cardInfo));
+    },[cardInfo])
 
     const handlerLocalToTogleFavourites = ()=>{
         actions.arrayContainsObjectWithGivenNameProperty(store.favourites, cardInfo.name) ?

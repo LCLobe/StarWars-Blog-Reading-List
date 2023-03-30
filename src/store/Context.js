@@ -30,12 +30,13 @@ export const ContextProvider = ({children}) => {
             return (nameOfElementToDelete !== element.name);
         }));
     }
-    const checkStorage =(stringOfStorage, seterUseState)=>{
+    const checkStorage =(stringOfStorage, seter, geter)=>{
         if (localStorage.getItem(stringOfStorage) != null) {
             const myTempPeople = JSON.parse(localStorage.getItem(stringOfStorage));
-            seterUseState(myTempPeople);
+            seter(myTempPeople);
         }else {
-            getCharacters(seterUseState);
+            if (typeof(geter) != "function") return;
+            geter(seter);
         }
     }
 
@@ -43,43 +44,26 @@ export const ContextProvider = ({children}) => {
     useEffect(( ) => {
         
         try{
-            if (localStorage.getItem('storagePeople') != null) {
-                const myTempPeople = JSON.parse(localStorage.getItem('storagePeople'));
-                setPeople(myTempPeople);
-            }else {
-                getCharacters(setPeople);
-            }
+            checkStorage('storagePeople',setPeople,getCharacters);
         }catch (err) {
             console.log('Error: ', err.message);
         }
         try{
-            if (localStorage.getItem('storagePlanets') != null) {
-                const myTempPlanets = JSON.parse(localStorage.getItem('storagePlanets'));
-                setPlanets(myTempPlanets);
-            }else {
-                getPlanets(setPlanets);
-            }
+            checkStorage('storagePlanets',setPlanets,getPlanets);
         }catch (err) {
             console.log('Error: ', err.message);
         }
         try{
-            if (localStorage.getItem('storageVehicles') != null) {
-                const myTempVehicles = JSON.parse(localStorage.getItem('storageVehicles'));
-                setVehicles(myTempVehicles);
-            }else {
-                getVehicles(setVehicles);
-            }
+            checkStorage('storageVehicles',setVehicles,getVehicles);
         }catch (err) {
             console.log('Error: ', err.message);
         }
         try{
-            if (localStorage.getItem('storageFavourites') != null) {
-                const myTempFavourites = JSON.parse(localStorage.getItem('storageFavourites'));
-                setFavourites(myTempFavourites);
-            }
+            checkStorage('storageFavourites',setFavourites,null);
         }catch (err) {
             console.log('Error: ', err.message);
         }
+
     }, []);
 
     useEffect(()=>{

@@ -5,7 +5,6 @@ import Layout from "../modules/Layout.jsx";
 
 import Home from "../views/Home.jsx";
 import Details from "../views/Details.jsx";
-import PlanetDetails from "../modules/DetailsPlanet.jsx";
 
 export const Router = createBrowserRouter([
     {
@@ -32,17 +31,5 @@ export const Router = createBrowserRouter([
             } ,
 
     ]
-    },
-    {
-        path: '/planetdetails'  ,
-        element: <PlanetDetails />
-    } //,
-    // {
-    //     path: '/'   ,
-    //     element: <VehiculeDetails />
-    // },
-    // {
-    //     path: '/'  ,
-    //     element: <CharacterDetails />
-    // }
+    }
 ]);

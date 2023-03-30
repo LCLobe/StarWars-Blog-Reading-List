@@ -1,9 +1,6 @@
 import React from "react";
 
 import Card from "../modules/Card.jsx";
-import CardCharacter from "../modules/CardCharacter.jsx";
-import CardPlanet from "../modules/CardPlanet.jsx";
-import CardVehicle from "../modules/CardVehicle.jsx";
 import useAppContext  from "../store/Context.js";
 
 const Home = () =>  {
@@ -11,9 +8,9 @@ const Home = () =>  {
     const {store} = useAppContext();
     
     const {people, vehicles, planets} = store;
-    console.log(people);
-    console.log(planets);
-    console.log(vehicles);
+    // console.log(people);
+    // console.log(planets);
+    // console.log(vehicles);
     
     if (people.length == 0 || planets.length == 0 || vehicles.length == 0) {
         return (

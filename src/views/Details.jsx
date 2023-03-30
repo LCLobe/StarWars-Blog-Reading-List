@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import useAppContext from "../store/Context";
 import { object } from "prop-types";
@@ -15,8 +15,14 @@ const Details = ()=> {
 
     //Create URLs
     const [itemInfo, setItemInfo] = useState ();
-    const [urlForFetch, setUrlForFetch] = useState ("https://www.swapi.tech/api/"+params.group+"/"+params.id);
-    const [urlForImage, setUrlForImage] = useState (`https://starwars-visualguide.com/assets/img/${params.group!=="people"?params.group:"characters"}/${params.id}.jpg`);
+    
+    const urlForFetch = useMemo(()=>{
+        return "https://www.swapi.tech/api/"+params.group+"/"+params.id;
+    }, []);
+    const urlForImage = useMemo(()=>{
+        return `https://starwars-visualguide.com/assets/img/${params.group!=="people"?params.group:"characters"}/${params.id}.jpg`;
+    },[])
+   
     const [arrayOfProperties, setArrayOfProperties] = useState ([]);
 
     if (params.group=="planets" && params.id ==1) setUrlForImage("https://talentclick.com/wp-content/uploads/2021/08/placeholder-image.png");
@@ -38,6 +44,7 @@ const Details = ()=> {
                     fetch(urlForFetch)
                     .then(res => res.json())
                     .then(({result}) => {
+                        console.log("result: ", result);
                         setItemInfo(result);
                         setArrayOfProperties(Object.entries(result));
                         })  

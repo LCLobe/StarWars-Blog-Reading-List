@@ -19,10 +19,8 @@ const Card = ({url, uid, propOneLabel, propOneContent, propTwoLabel, propTwoCont
         if (uid==1 && actions.getGroupDetails(url) === "planets") setUrlForImage("https://static.wikia.nocookie.net/esstarwars/images/b/b0/Tatooine_TPM.png");
 
         try{
-            //console.log(url, localStorage.getItem(url));
             if (localStorage.getItem(url) != null) {
                 const myCardStorage = JSON.parse(localStorage.getItem(url));
-                //console.log("Distinto de undefined: ", myCardStorage);
                 setCardInfo(myCardStorage);
             }else {
                 actions.getResultProperties(url,setCardInfo)
@@ -30,9 +28,6 @@ const Card = ({url, uid, propOneLabel, propOneContent, propTwoLabel, propTwoCont
         }catch (err) {
             console.log('Error: ', err.message);
         }
-
-        //actions.getResultProperties(url,setCardInfo)
-
     },[]);
 
     useEffect(()=>{
@@ -64,7 +59,7 @@ const Card = ({url, uid, propOneLabel, propOneContent, propTwoLabel, propTwoCont
                 </div>
                 <div className="row">
                     <div className="d-flex d-inline-flex justify-content-around p-2">
-                        <Link to={"/details"+"/"+actions.getPathDetails(cardInfo.url)} className="btn btn-lg btn-outline-primary">Learn more!</Link>
+                        <Link to={"/details"+"/"+actions.getPathDetails(cardInfo.url)} className="btn btn-outline-light">Learn more!</Link>
                         <button onClick={handlerLocalToTogleFavourites} className={"btn btn-outline-warning card-button"+cardButtonClass}>{cardButtonIcon}</button>
                     </div>
                 </div>

@@ -6,6 +6,10 @@ body {
     background-image: url("https://st2.depositphotos.com/3031831/5365/i/450/depositphotos_53655223-stock-photo-space-full-of-stars-seamless.jpg");
     background-repeat: repeat;
 }
+a, div .icon{
+    color: goldenrod;
+    text-decoration: none;
+}
 .navbar {
     position: fixed;
     top: 0;
@@ -23,6 +27,9 @@ body {
     font-size: 3rem;
     text-align: center;
     color: gold;
+}
+.dropwdown-menu{
+    min-width: 20rem;
 }
 span .navbar-text{
     color: darkgoldenrod;

@@ -13,7 +13,7 @@ const DropDown = () => {
                 Favourites 
                 {store.favourites.length ? <span className="dropdown-number"> {store.favourites.length}</span> : null}
             </button>
-            <ul className="dropdown-menu">
+            <ul className="dropdown-menu bg-secondary">
                  {store.favourites.map(({name, group, number, url}) => {
                     
                     const handlerLocalRemoveFromFavourites = ()=>{

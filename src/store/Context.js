@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import {arrayContainsObjectWithGivenNameProperty, getGroupDetails, getPathDetails, getArrayOfSinglePropertyArrays} from "../utils/functions.js"
 import { getResultProperties, getCharacters, getPlanets, getVehicles } from "../services/getFetch.js";
+import { detailsProperties } from "./SelectedPropertiesForDetails.js"
 
 const Context = createContext();
 
@@ -29,9 +30,17 @@ export const ContextProvider = ({children}) => {
             return (nameOfElementToDelete !== element.name);
         }));
     }
+    const checkStorage =(stringOfStorage, seterUseState)=>{
+        if (localStorage.getItem(stringOfStorage) != null) {
+            const myTempPeople = JSON.parse(localStorage.getItem(stringOfStorage));
+            seterUseState(myTempPeople);
+        }else {
+            getCharacters(seterUseState);
+        }
+    }
 
     //Fetch
-    useEffect(() => {
+    useEffect(( ) => {
         
         try{
             if (localStorage.getItem('storagePeople') != null) {
@@ -91,7 +100,8 @@ export const ContextProvider = ({children}) => {
         people, 
         vehicles,
         planets,
-        favourites
+        favourites,
+        detailsProperties
     };
     const actions ={
         handleAddToFavourites,

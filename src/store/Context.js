@@ -35,7 +35,7 @@ export const ContextProvider = ({children}) => {
             const myTempPeople = JSON.parse(localStorage.getItem(stringOfStorage));
             seter(myTempPeople);
         }else {
-            if (typeof(geter) != "function") return;
+            if (!geter) return;
             geter(seter);
         }
     }

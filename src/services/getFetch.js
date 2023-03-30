@@ -12,8 +12,8 @@ const getFetch = (url, useStateSeter) => {
 export const getResultProperties = (url, useStateSeter) => {
     fetch(url)
         .then(res => res.json())
-        .then(({result: {properties}}) => {
-            useStateSeter(properties);
+        .then(({result: {properties}, description, uid}) => {
+            useStateSeter({...properties, description, uid});
         })
         .catch(err => console.error(err))
     return

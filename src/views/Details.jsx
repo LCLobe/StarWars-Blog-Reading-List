@@ -39,17 +39,17 @@ const Details = ()=> {
                 console.log("iteminfo: ", itemInfo);
     
             }else {
-                // console.log("estoy en el else");
-                // useEffect(()=>{
-                //     fetch(urlForFetch)
-                //     .then(res => res.json())
-                //     .then(({result}) => {
-                //         console.log("result: ", result);
-                //         setItemInfo(result);
-                //         setArrayOfProperties(Object.entries(result));
-                //         })  
-                //     .catch(err => console.error(err))    
-                // },[]);
+                console.log("estoy en el else");
+                useEffect(()=>{
+                    fetch(urlForFetch)
+                    .then(res => res.json())
+                    .then(({result}) => {
+                        console.log("result: ", result);
+                        setItemInfo(result);
+                        setArrayOfProperties(Object.entries(result));
+                        })  
+                    .catch(err => console.error(err))    
+                },[]);
             }
         }catch (err) {
             console.log('Error: ', err.message);

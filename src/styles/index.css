@@ -30,6 +30,9 @@ a, div .icon{
 }
 .dropwdown-menu{
     min-width: 20rem;
+    display: flex;
+    justify-content: end;
+
 }
 span .navbar-text{
     color: darkgoldenrod;
@@ -50,7 +53,9 @@ span .navbar-text{
     object-fit: cover;
 }
 .card-imageWrapper{
-    object-fit: cover;
+    /*object-fit: cover;*/
+    aspect-ratio: 1/1;
+
 }
 .icon {
     color: blue;
@@ -60,4 +65,9 @@ span .navbar-text{
 }
 .text-nowrap {
     white-space: nowrap
+}
+.spinner-border{
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
 }

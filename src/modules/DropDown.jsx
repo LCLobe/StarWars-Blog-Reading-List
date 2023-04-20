@@ -8,7 +8,7 @@ const DropDown = () => {
     const {store, actions} = useAppContext();
     
     return (
-        <div className="btn-group">
+        <div className="btn-group dropdown dropstart">
             <button type="button" className="btn dropdown-toggle navbar-text" data-bs-toggle="dropdown" aria-expanded="false">
                 Favourites 
                 {store.favourites.length ? <span className="dropdown-number"> {store.favourites.length}</span> : null}
@@ -23,12 +23,12 @@ const DropDown = () => {
                     
                     return (
                         <li key={`${group}${number}`}>
-                            <div className="row d-flex d-inline-flex justify-content-around p-2">
-                                <div className="col">
+                            <div className="row d-flex p-2">
+                                <div className="col-8">
                                     <Link to={"/details/"+group+"/"+number}>{name}   </Link>
                                 </div>
-                                <div className="col" onClick={handlerLocalRemoveFromFavourites}>
-                                    <i className="fa-solid fa-trash icon text-center" ></i>
+                                <div className="col-2" onClick={handlerLocalRemoveFromFavourites}>
+                                    <i className="fa-solid fa-trash icon text-center align-middle" ></i>
                                 </div>
                             </div>
                         </li>

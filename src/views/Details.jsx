@@ -9,6 +9,7 @@ const Details = ()=> {
     //React
     const params =useParams();
     const {store, actions} =useAppContext();
+    const [description, setDescription]  = useState("");
     
     //Function:
     const {selectedProperties, titlesForProperties} = store.detailsProperties;
@@ -36,25 +37,33 @@ const Details = ()=> {
                 
                 setItemInfo(myCardStorage);
                 setArrayOfProperties(Object.entries(myCardStorage));
-                console.log("iteminfo: ", itemInfo);
     
             }else {
-                console.log("estoy en el else");
-                useEffect(()=>{
-                    fetch(urlForFetch)
-                    .then(res => res.json())
-                    .then(({result}) => {
-                        console.log("result: ", result);
-                        setItemInfo(result);
-                        setArrayOfProperties(Object.entries(result));
-                        })  
-                    .catch(err => console.error(err))    
-                },[]);
+                fetch(urlForFetch)
+                .then(res => res.json())
+                .then(({result}) => {
+                    //console.log("result: ", result);
+                    setItemInfo(result);
+                    setArrayOfProperties(Object.entries(result));
+                    })  
+                .catch(err => console.error(err))    
             }
         }catch (err) {
             console.log('Error: ', err.message);
         }
+        
+        fetch(urlForFetch)
+        .then(res => res.json())
+        .then(({result}) => {
+            console.log("result: ", result);
+            setDescription(result.description);
+            console.log(description);
+            })  
+        .catch(err => console.error(err))    
+        
+
     },[]);
+
     return (
         <div className="container p-4">
             <div className="row mt-5">
@@ -65,7 +74,7 @@ const Details = ()=> {
                 </div>
                 <div className="col">
                     <h1 className="details-title">{itemInfo? itemInfo.name : ""}</h1>
-                    <p className="details-paragraph">{itemInfo? itemInfo.description : null}</p>
+                    <p className="details-paragraph">{description}</p>
                 </div>
             </div>
             <hr></hr>

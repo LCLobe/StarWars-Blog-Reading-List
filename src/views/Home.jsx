@@ -15,7 +15,7 @@ const Home = () =>  {
     if (people.length == 0 || planets.length == 0 || vehicles.length == 0) {
         return (
             <div className="spinner-border text-warning" role="status">
-                <h1>Loading...</h1> 
+                <h1></h1> 
                 <span className="visually-hidden">Loading...</span>
             </div>
         );
